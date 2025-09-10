@@ -1,0 +1,73 @@
+🔹 1. return in Bash
+The return statement in Bash does not return a normal value like in Python/Java.
+Instead, it returns an exit status (0–255), also called the function’s return code.
+By convention:
+0 = success
+non-zero = failure / error code
+👉 The value can be checked using $? immediately after calling the function.
+
+Example – Using return
+#!/bin/bash
+check_even() {
+    if (( $1 % 2 == 0 )); then
+        return 0   # success
+    else
+        return 1   # failure
+    fi
+}
+check_even 6
+echo "Return code: $?"   # 0 → success
+check_even 7
+echo "Return code: $?"   # 1 → failure
+✅ Output:
+Return code: 0
+Return code: 1
+
+🔹 2. echo for Real Values
+If you want a function to give back a real value (like numbers, strings, text), you should use echo and capture it with command substitution ($(...)).
+
+Example – Using echo
+#!/bin/bash
+square() {
+    echo $(( $1 * $1 ))
+}
+result=$(square 7)
+echo "Square is: $result"
+✅ Output:
+Square is: 49
+
+🔹 3. Mixing return and echo
+Sometimes, you can use return for status check and echo for value output.
+#!/bin/bash
+divide() {
+    if [ $2 -eq 0 ]; then
+        echo "Error: Division by zero"
+        return 1   # failure
+    else
+        echo $(( $1 / $2 ))
+        return 0   # success
+    fi
+}
+result=$(divide 10 2)
+if [ $? -eq 0 ]; then
+    echo "Result = $result"
+fi
+✅ Output:
+Result = 5
+
+🔑 Summary
+return <n> → exit status (0–255 only, checked with $?).
+echo <value> → output value, capture it using $(function_name).
+Use return for error codes, use echo for data values.
+
+🔹 return vs echo in Bash
+| Feature            | `return`                                         | `echo`                                          |
+| ------------------ | ------------------------------------------------ | ----------------------------------------------- |
+| **Purpose**        | Returns an **exit status code (0–255)**          | Outputs a **real value (string, number, etc.)** |
+| **Value Range**    | 0–255 only                                       | Any string, number, or text                     |
+| **Use Case**       | Indicating **success/failure** or error handling | Returning **actual values** (results, data)     |
+| **How to Capture** | `$?` (after function call)                       | `result=$(func args)` (command substitution)    |
+| **Default Value**  | Last command’s exit status                       | Whatever string you `echo`                      |
+| **Example**        | `return 1` → function failed                     | `echo $((2+3))` → returns `5`                   |
+| **Best Practice**  | Use for **status check** (like `true`/`false`)   | Use for **output values**                       |
+

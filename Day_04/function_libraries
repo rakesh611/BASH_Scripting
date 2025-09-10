@@ -1,0 +1,46 @@
+🔹 What is a Function Library?
+A function library is simply a file containing functions (and sometimes variables).
+You can reuse it in multiple scripts by sourcing it.
+This helps you avoid code duplication.
+
+🔹 Sourcing a File
+There are two ways to include another file in Bash:
+source filename
+or (dot notation)
+. filename
+👉 Both do the same thing: execute the content of the file in the current shell (not in a subshell).
+
+🔹 Example – Function Library
+Step 1: Create a library file (mylib.sh)
+#!/bin/bash
+# Function Library
+greet() {
+    echo "Hello, $1!"
+}
+
+add_numbers() {
+    echo $(( $1 + $2 ))
+}
+
+Step 2: Use it in another script (main.sh)
+#!/bin/bash
+# Import library
+source ./mylib.sh    # or . ./mylib.sh
+# Call functions from library
+greet "Rakesh"
+result=$(add_numbers 10 20)
+echo "Result: $result"
+
+✅ Run script:
+$ bash main.sh
+Hello, Rakesh!
+Result: 30
+
+🔹 Example – Multiple Libraries
+You can source more than one file:
+source ./mathlib.sh
+source ./stringlib.sh
+🔑 Key Points
+source file or . file runs the content in the current shell.
+Commonly used for function libraries and environment variable files.
+Helps you write modular, reusable scripts.

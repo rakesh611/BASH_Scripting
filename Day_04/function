@@ -1,0 +1,35 @@
+In Bash, a function is a block of reusable code that you can define once and then call multiple times in your script.
+Functions make scripts organized, modular, and reusable.
+In Bash, there are two common ways to define a function, and both are valid.
+
+🔹 Method 1 – Using function keyword
+function function_name {
+    commands
+}
+
+✅ Example:
+#!/bin/bash
+function greet {
+    echo "Hello from Bash function!"
+}
+
+greet   # calling function
+
+🔹 Method 2 – Using ()
+function_name() {
+    commands
+}
+
+✅ Example:
+#!/bin/bash
+greet() {
+    echo "Hello again from Bash function!"
+}
+
+greet   # calling function
+
+🔹 Key Points
+Both function name {} and name() {} work the same in Bash.
+Some old POSIX shells don’t support function keyword, so the name() {} form is more portable.
+Functions must be defined before being called in the script.
+Function names should follow variable naming rules (letters, numbers, _, but not starting with a number).

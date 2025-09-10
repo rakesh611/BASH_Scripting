@@ -1,0 +1,69 @@
+When you call a function, you can pass arguments just like when you call a script.
+Inside the function, Bash provides special variables:
+
+🔹 Special Variables for Function Arguments
+| Variable | Meaning                            |
+| -------- | ---------------------------------- |
+| `$1`     | First argument                     |
+| `$2`     | Second argument                    |
+| `$3`     | Third argument (and so on)         |
+| `$@`     | All arguments (as a list)          |
+| `$*`     | All arguments (as a single string) |
+| `$#`     | Number of arguments passed         |
+
+🔹 Example 1 – Single Argument
+#!/bin/bash
+greet() {
+    echo "Hello, $1!"
+}
+
+greet "Rakesh"
+
+✅ Output:
+Hello, Rakesh!
+
+🔹 Example 2 – Multiple Arguments
+#!/bin/bash
+add_numbers() {
+    sum=$(( $1 + $2 ))
+    echo "Sum of $1 and $2 is: $sum"
+}
+
+add_numbers 15 25
+✅ Output:
+Sum of 15 and 25 is: 40
+
+🔹 Example 3 – Using $@ and $#
+#!/bin/bash
+show_args() {
+    echo "Total arguments: $#"
+    echo "All arguments individually: $@"
+    echo "All arguments as single string: $*"
+}
+
+show_args one two three "four five"
+✅ Output:
+Total arguments: 4
+All arguments individually: one two three four five
+All arguments as single string: one two three four five
+
+🔹 Example 4 – Looping Through Arguments
+#!/bin/bash
+print_all() {
+    echo "Printing all arguments:"
+    for arg in "$@"; do
+        echo "$arg"
+    done
+}
+
+print_all apple banana cherry
+✅ Output:
+Printing all arguments:
+apple
+banana
+cherry
+
+🔑 Key Notes:
+$@ → preserves arguments as separate words (recommended).
+$* → merges all into one string (less common).
+$# → helps check if correct number of arguments are passed.
