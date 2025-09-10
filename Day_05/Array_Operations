@@ -1,0 +1,73 @@
+🔹 1. Adding Elements
+Indexed Array
+fruits=("apple" "banana")
+fruits+=("cherry")   # add at next index
+fruits[5]="mango"    # add at specific index
+echo "${fruits[@]}"
+
+✅ Output:
+apple banana cherry mango
+
+Associative Array
+declare -A person
+person[name]="Rakesh"
+person[city]="Delhi"
+person[role]="DevOps Engineer"
+
+🔹 2. Updating Elements
+fruits[1]="grape"   # replace banana with grape
+person[city]="Mumbai"   # update key
+
+🔹 3. Deleting Elements
+unset fruits[1]       # remove index 1
+unset person[role]    # remove key "role"
+✅ After unset, the element is removed.
+
+🔹 4. Length of Array
+echo "${#fruits[@]}"   # number of elements
+echo "${#person[@]}"   # number of key-value pairs
+
+🔹 5. Slicing Arrays (Indexed Only)
+fruits=("apple" "banana" "cherry" "mango" "grape")
+echo "${fruits[@]:1:3}"   # from index 1, take 3 → banana cherry mango
+
+🔹 6. Get All Indexes/Keys
+echo "Indexes: ${!fruits[@]}"   # 0 1 2 ...
+echo "Keys: ${!person[@]}"      # name city ...
+
+🔹 7. Searching Elements
+Indexed Array
+search="mango"
+for fruit in "${fruits[@]}"; do
+    if [[ $fruit == $search ]]; then
+        echo "$search found!"
+    fi
+done
+
+Associative Array
+key="city"
+if [[ -n "${person[$key]}" ]]; then
+    echo "Key '$key' exists with value: ${person[$key]}"
+fi
+
+🔹 8. Looping Examples
+Indexed
+for i in "${!fruits[@]}"; do
+    echo "Index $i => ${fruits[$i]}"
+done
+
+Associative
+for key in "${!person[@]}"; do
+    echo "$key => ${person[$key]}"
+done
+
+🔹 9. Copying Arrays
+new_fruits=("${fruits[@]}")
+declare -A new_person=("${person[@]}")
+
+🔹 10. Clearing Whole Array
+unset fruits
+unset person
+
+
+

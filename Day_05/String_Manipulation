@@ -1,0 +1,73 @@
+🔹 1. String Length
+str="Hello World"
+echo ${#str}   # 11
+
+🔹 2. Substring Extraction
+str="Hello World"
+echo ${str:0:5}   # Hello (from index 0, length 5)
+echo ${str:6}     # World (from index 6 to end)
+
+🔹 3. String Replacement
+str="I like apples"
+echo ${str/apples/oranges}     # Replace first match → I like oranges
+echo ${str//like/love}         # Replace all → I love apples
+
+🔹 4. Remove Prefix / Suffix
+str="filename.txt"
+
+# Remove prefix
+echo ${str#file}   # name.txt   (shortest match from start)
+echo ${str##file}  # name.txt   (longest match from start)
+
+# Remove suffix
+echo ${str%.txt}   # filename   (shortest match from end)
+echo ${str%%.txt}  # filename   (longest match from end)
+
+🔹 5. Trimming Whitespace (Leading/Trailing)
+
+Bash doesn’t have built-in trim, but you can use:
+str="   hello world   "
+
+# Remove leading whitespace
+echo "${str#"${str%%[![:space:]]*}"}"
+
+# Remove trailing whitespace
+echo "${str%"${str##*[![:space:]]}"}"
+
+🔹 6. Convert Case
+str="hello world"
+echo ${str^^}   # HELLO WORLD (uppercase)
+echo ${str,,}   # hello world (lowercase)
+
+🔹 7. Check if String Contains Substring
+str="I love DevOps"
+if [[ $str == *DevOps* ]]; then
+    echo "Substring found"
+fi
+
+🔹 8. Split String
+str="apple,banana,cherry"
+IFS=',' read -ra fruits <<< "$str"
+echo "${fruits[0]}"   # apple
+echo "${fruits[1]}"   # banana
+
+🔹 Bash String Operations Cheat Sheet
+| Operation                    | Syntax                            | Example                                                     | Output                         |         |      |
+| ---------------------------- | --------------------------------- | ----------------------------------------------------------- | ------------------------------ | ------- | ---- |
+| **Length**                   | `${#str}`                         | `str="Hello"; echo ${#str}`                                 | `5`                            |         |      |
+| **Substring**                | `${str:start:length}`             | `str="Hello World"; echo ${str:0:5}`                        | `Hello`                        |         |      |
+| **From Index**               | `${str:start}`                    | `echo ${str:6}`                                             | `World`                        |         |      |
+| **Replace First Match**      | `${str/pat/repl}`                 | `str="I like apples"; echo ${str/apples/oranges}`           | `I like oranges`               |         |      |
+| **Replace All Matches**      | `${str//pat/repl}`                | `echo ${str//like/love}`                                    | `I love apples`                |         |      |
+| **Remove Prefix (shortest)** | `${str#pattern}`                  | `str="file.txt"; echo ${str#file}`                          | `txt`                          |         |      |
+| **Remove Prefix (longest)**  | `${str##pattern}`                 | `echo ${str##file}`                                         | `txt`                          |         |      |
+| **Remove Suffix (shortest)** | `${str%pattern}`                  | `str="file.txt"; echo ${str%.txt}`                          | `file`                         |         |      |
+| **Remove Suffix (longest)**  | `${str%%pattern}`                 | `echo ${str%%.txt}`                                         | `file`                         |         |      |
+| **Uppercase**                | `${str^^}`                        | `str="hello"; echo ${str^^}`                                | `HELLO`                        |         |      |
+| **Lowercase**                | `${str,,}`                        | `str="HELLO"; echo ${str,,}`                                | `hello`                        |         |      |
+| **Trim Leading Whitespace**  | `${str#"${str%%[![:space:]]*}"}`  | `str="   hi"; echo "[$str]"`                                | `[hi]`                         |         |      |
+| **Trim Trailing Whitespace** | `${str%"${str##*[![:space:]]}"}`  | `str="hi   "; echo "[$str]"`                                | `[hi]`                         |         |      |
+| **Trim Both (easy way)**     | \`echo "\$str"                    | xargs\`                                                     | \`str="   hi   "; echo "\$str" | xargs\` | `hi` |
+| **Check Substring**          | `[[ $str == *sub* ]]`             | `str="I love DevOps"; [[ $str == *DevOps* ]] && echo found` | `found`                        |         |      |
+| **Split String**             | `IFS=',' read -ra arr <<< "$str"` | `str="a,b,c"; echo ${arr[1]}`                               | `b`                            |         |      |
+

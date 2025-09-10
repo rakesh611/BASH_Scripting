@@ -1,0 +1,72 @@
+Arrays in Bash let you store multiple values in a single variable and access them by index. 
+Unlike some other languages, Bash only supports one-dimensional arrays (but you can simulate associative arrays too).
+
+🔹 What is an Indexed Array?
+An indexed array is a collection of values stored under numerical indexes (0,1,2,3...).
+Unlike some programming languages, Bash arrays are not fixed size — you can add elements dynamically.
+Default index starts from 0.
+
+🔹 Declaring Arrays
+1. Explicit declaration
+declare -a my_array
+
+2. Initialize with values
+fruits=("apple" "banana" "cherry")
+
+3. Assign values individually
+fruits[0]="apple"
+fruits[1]="banana"
+fruits[2]="cherry"
+
+🔹 Accessing Elements
+echo "${fruits[0]}"   # apple
+echo "${fruits[1]}"   # banana
+
+🔹 All Elements
+echo "${fruits[@]}"   # apple banana cherry
+
+🔹 Array Length
+echo "${#fruits[@]}"   # 3 (number of elements)
+
+🔹 Adding / Updating Elements
+fruits[3]="mango"     # add at index 3
+fruits[1]="grape"     # update index 1
+
+🔹 Looping Through Arrays
+Method 1 – For loop
+for fruit in "${fruits[@]}"; do
+    echo "$fruit"
+done
+
+Method 2 – Using index
+for i in "${!fruits[@]}"; do
+    echo "Index $i: ${fruits[$i]}"
+done
+
+🔹 Example Script
+#!/bin/bash
+fruits=("apple" "banana" "cherry")
+
+echo "First fruit: ${fruits[0]}"
+echo "All fruits: ${fruits[@]}"
+echo "Number of fruits: ${#fruits[@]}"
+
+echo "Looping through fruits:"
+for i in "${!fruits[@]}"; do
+    echo "Index $i => ${fruits[$i]}"
+done
+
+✅ Output:
+First fruit: apple
+All fruits: apple banana cherry
+Number of fruits: 3
+Looping through fruits:
+Index 0 => apple
+Index 1 => banana
+Index 2 => cherry
+
+🔑 Key Notes
+Indexed arrays are 0-based.
+Use "${array[@]}" to get all values.
+Use "${!array[@]}" to get all indexes.
+Use "${#array[@]}" to get length.

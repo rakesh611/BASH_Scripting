@@ -1,0 +1,95 @@
+🔹 What is an Associative Array?
+An associative array is like a dictionary in Python or a map in Java.
+Instead of numeric indexes (0,1,2), you use string keys ("name", "city", "id", etc.).
+Supported only in Bash 4.0+ (not in very old versions).
+
+🔹 Declaring an Associative Array
+declare -A my_array
+
+🔹 Adding Elements
+declare -A person
+person[name]="Rakesh"
+person[role]="DevOps Engineer"
+person[city]="Delhi"
+
+🔹 Accessing Elements
+echo "${person[name]}"    # Rakesh
+echo "${person[role]}"    # DevOps Engineer
+
+🔹 Print All Keys & Values
+echo "All keys: ${!person[@]}"
+echo "All values: ${person[@]}"
+
+🔹 Length of Array
+echo "Total elements: ${#person[@]}"
+
+🔹 Looping Through Associative Arrays
+for key in "${!person[@]}"; do
+    echo "$key => ${person[$key]}"
+done
+
+✅ Output:
+name => Rakesh
+role => DevOps Engineer
+city => Delhi
+
+🔹 Example Script
+#!/bin/bash
+# Declare associative array
+declare -A car
+
+# Assign values
+car[brand]="Toyota"
+car[model]="Innova"
+car[color]="White"
+car[year]=2023
+
+# Access single element
+echo "Car brand: ${car[brand]}"
+
+# Print all elements
+echo "All values: ${car[@]}"
+
+# Print all keys
+echo "All keys: ${!car[@]}"
+
+# Print number of elements
+echo "Total keys: ${#car[@]}"
+
+# Loop through key-value pairs
+echo "Car details:"
+for key in "${!car[@]}"; do
+    echo "$key => ${car[$key]}"
+done
+
+✅ Output:
+Car brand: Toyota
+All values: Toyota Innova White 2023
+All keys: brand model color year
+Total keys: 4
+Car details:
+brand => Toyota
+model => Innova
+color => White
+year => 2023
+
+🔑 Key Points
+Must declare with declare -A name.
+Access values with ${array[key]}.
+Use "${!array[@]}" for keys and "${array[@]}" for values.
+Only available in Bash 4+ (check with bash --version)
+
+🔹 Indexed vs Associative Arrays in Bash
+| Feature              | **Indexed Arrays**                                  | **Associative Arrays**                                          |
+| -------------------- | --------------------------------------------------- | --------------------------------------------------------------- |
+| **Declaration**      | `declare -a arr` (optional, default)                | `declare -A arr` (mandatory)                                    |
+| **Index Type**       | Numbers (0, 1, 2, …)                                | Strings/keys (`"name"`, `"id"`, etc.)                           |
+| **Initialization**   | `arr=(apple banana cherry)`                         | `arr=([name]="Rakesh" [city]="Delhi")`                          |
+| **Assign Value**     | `arr[0]="apple"`                                    | `arr[name]="Rakesh"`                                            |
+| **Access Value**     | `${arr[0]}`                                         | `${arr[name]}`                                                  |
+| **All Values**       | `${arr[@]}`                                         | `${arr[@]}`                                                     |
+| **All Indexes/Keys** | `${!arr[@]}` → `0 1 2`                              | `${!arr[@]}` → `name city`                                      |
+| **Length**           | `${#arr[@]}`                                        | `${#arr[@]}`                                                    |
+| **Looping**          | `for i in "${!arr[@]}"; do echo "${arr[$i]}"; done` | `for key in "${!arr[@]}"; do echo "$key => ${arr[$key]}"; done` |
+| **Default Support**  | Available in all Bash versions                      | Available **only in Bash 4.0+**                                 |
+
