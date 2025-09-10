@@ -1,0 +1,107 @@
+Operators are symbols that let you perform comparisons, arithmetic, logic, and string operations inside Bash scripts.
+
+🔹 Types of Operators in Bash
+1. Arithmetic Operators
+Used for mathematical calculations.
++ → addition
+- → subtraction
+* → multiplication
+/ → division
+% → modulus (remainder)
+** → exponentiation
+
+✅ Example:
+#!/bin/bash
+a=10
+b=3
+
+echo "a+b = $((a + b))"
+echo "a-b = $((a - b))"
+echo "a*b = $((a * b))"
+echo "a/b = $((a / b))"
+echo "a%b = $((a % b))"
+echo "a^b = $((a ** b))"
+
+2. Relational / Comparison Operators
+Used for numbers only inside [ ].
+-eq → equal to
+-ne → not equal to
+-gt → greater than
+-lt → less than
+-ge → greater than or equal to
+-le → less than or equal to
+
+✅ Example:
+#!/bin/bash
+x=10
+y=20
+
+if [ $x -lt $y ]; then
+    echo "$x is less than $y"
+fi
+
+3. String Operators
+Used for string comparison.
+= → equal
+!= → not equal
+< → less than (lexical order)
+> → greater than (lexical order)
+-z string → true if string is empty
+-n string → true if string is not empty
+
+✅ Example:
+#!/bin/bash
+str1="hello"
+str2="world"
+
+if [ "$str1" != "$str2" ]; then
+    echo "Strings are different"
+fi
+
+4. Logical Operators
+Used to combine conditions.
+&& → logical AND
+|| → logical OR
+! → logical NOT
+
+✅ Example:
+#!/bin/bash
+age=20
+citizen="yes"
+
+if [ $age -ge 18 ] && [ $citizen = "yes" ]; then
+    echo "Eligible to vote"
+fi
+
+5. File Test Operators
+Used to check properties of files.
+-e file → file exists
+-f file → is a regular file
+-d file → is a directory
+-r file → readable
+-w file → writable
+-x file → executable
+-s file → file size > 0
+
+✅ Example:
+#!/bin/bash
+file="/etc/passwd"
+
+if [ -f $file ]; then
+    echo "File exists and is a regular file"
+fi
+
+6. Assignment Operators
+= → assign a value
++= → add and assign
+-= → subtract and assign
+*= → multiply and assign
+/= → divide and assign
+
+✅ Example:
+#!/bin/bash
+num=10
+((num += 5))   # num = num + 5
+echo "num = $num"
+
+
