@@ -1,0 +1,75 @@
+A loop is used when you want to execute a block of commands repeatedly.
+Bash supports three main types of loops: for, while, until.
+
+🔹 1. for loop
+Used when you know how many times to repeat.
+
+Syntax
+for variable in list
+do
+    # commands
+done
+
+Example– Print Numbers
+#!/bin/bash
+for i in 1 2 3 4 5
+do
+    echo "Number: $i"
+done
+
+🔹 2. while loop
+Runs as long as a condition is true.
+
+Syntax
+while [ condition ]
+do
+    # commands
+done
+
+Example – Countdown
+#!/bin/bash
+count=5
+while [ $count -gt 0 ]
+do
+    echo "Countdown: $count"
+    ((count--))
+done
+
+🔹 3. until loop
+Runs until a condition becomes true (opposite of while).
+
+Syntax
+until [ condition ]
+do
+    # commands
+done
+
+Example – Count Up
+#!/bin/bash
+num=1
+until [ $num -gt 5 ]
+do
+    echo "Number: $num"
+    ((num++))
+done
+
+🔹 4. Loop Control Statements
+break → exit the loop immediately.
+continue → skip the current iteration and move to the next.
+
+Example – Skip Number
+#!/bin/bash
+for i in {1..5}
+do
+    if [ $i -eq 3 ]
+    then
+        continue
+    fi
+    echo "Number: $i"
+done
+✅ Output: 1, 2, 4, 5
+
+🔑 Key Points
+Use for loop → when iterating over a list or fixed range.
+Use while loop → when looping depends on a condition.
+Use until loop → when you want to keep looping until a condition is met.

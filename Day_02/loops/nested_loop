@@ -1,0 +1,49 @@
+A nested loop means putting one loop inside another loop.
+It’s useful when working with tables, grids, or multiple lists.
+
+🔹 Syntax of Nested Loops:-
+for outer in list1
+do
+    for inner in list2
+    do
+        # commands using $outer and $inner
+    done
+done
+
+🔹 Example – Multiplication Table
+#!/bin/bash
+
+for i in {1..5}
+do
+    for j in {1..5}
+    do
+        echo -n "$((i * j)) "
+    done
+    echo  # new line after each row
+done
+✅ Output:
+1 2 3 4 5 
+2 4 6 8 10 
+3 6 9 12 15 
+4 8 12 16 20 
+5 10 15 20 25
+
+🔹 Example – Nested while Loop
+#!/bin/bash
+
+i=1
+while [ $i -le 3 ]
+do
+    j=1
+    while [ $j -le 3 ]
+    do
+        echo "i=$i, j=$j"
+        ((j++))
+    done
+    ((i++))
+done
+
+🔑 Key Points
+Inner loop runs completely for each outer loop iteration.
+Can be for-in-for, while-in-while, or mixed.
+Be careful with infinite loops when nesting while or until.
