@@ -1,0 +1,17 @@
+What is Shebang?
+The first line in most scripts:
+#!/bin/bash
+#! (called shebang or hashbang) tells the system which interpreter should run the script.
+
+Example:
+#!/bin/bash → run with Bash
+#!/bin/sh → run with default system shell
+#!/usr/bin/python3 → run with Python
+#!/usr/bin/env bash → run with Bash found in the user’s PATH
+
+How It Works
+When you run:
+./script.sh
+The kernel checks the first line of the file.
+If it starts with #!, it uses the specified interpreter.
+That interpreter runs the rest of the script.

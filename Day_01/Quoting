@@ -1,0 +1,48 @@
+Quoting decides how strings, variables, and special characters are interpreted in your scripts.
+
+🔑 Types of Quoting in Bash
+
+1. Double Quotes (" ")
+Preserves most text literally, but still allows:
+Variable expansion ($var)
+Command substitution ($( ))
+Escape sequences (\n, \t, etc. if used with echo -e)
+
+Example:
+name="Rakesh"
+echo "Hello $name"        # → Hello Rakesh
+echo "Date: $(date)"      # → expands command
+
+2. Single Quotes (' ')
+Everything inside is literal (no variable expansion, no substitution).
+Best for strings you want unchanged.
+
+Example:
+name="Rakesh"
+echo 'Hello $name'        # → Hello $name (NOT expanded)
+
+3. Escape Character (\)
+Escapes a single character to treat it literally.
+Useful when mixing quotes.
+
+Example:
+echo "She said: \"Hello!\""   # → She said: "Hello!"
+echo 'It\'s a sunny day'      # → It's a sunny day
+
+4. Backslash with Special Characters
+echo "Path: /home/rakesh/Desktop"
+echo "Dollar sign: \$100"     # → Dollar sign: $100
+echo "Newline:\nSecond line"  # works with echo -e
+
+🧾 Comparison Table
+| Quotes / Escape | Variables expand?         | Commands expand? | Literals preserved?   |
+| --------------- | ------------------------- | ---------------- | --------------------- |
+| `" "` (double)  | ✅ Yes                     | ✅ Yes            | ❌ Not all             |
+| `' '` (single)  | ❌ No                      | ❌ No             | ✅ Yes (all)           |
+| `\` (escape)    | ❌ (only one char escaped) | ❌                | ✅ (escaped char only) |
+
+📌 Best Practices
+Always quote variables → "$var" (prevents word-splitting & globbing).
+Use double quotes unless you explicitly need literal text.
+Escape only what’s necessary with \.
+Use single quotes when you want no expansion (e.g., regex, patterns).

@@ -1,0 +1,57 @@
+Bash (Bourne Again SHell) is a command-line interpreter and scripting language commonly used on Linux and Unix-like operating systems.
+It is both:
+An interactive shell – lets you type and run commands (like ls, cd, mkdir).
+A scripting language – you can write .sh or .bash scripts to automate tasks.
+
+# Key Features of Bash:
+Default shell in most Linux distributions.
+Provides command history, aliases, and tab completion.
+Supports variables, loops, functions, and conditionals (like a programming language).
+Can run system commands and chain them using operators (|, &&, ;).
+Portable across different systems that have Bash installed.
+
+Example:
+Run directly in terminal:
+# echo "Hello, World!"
+
+Example script (hello.sh):
+#!/bin/bash
+# A simple Bash script
+name="Rakesh"
+echo "Hello, $name! Welcome to Bash."
+
+Run it:
+bash hello.sh
+
+👉 In short: Bash is both a shell to interact with the OS and a language to automate tasks.
+
+1. What is a Shell?
+A shell is any program that provides an interface between the user and the operating system.
+It lets you run commands, manage files, and write scripts.
+There are different types of shells: sh, bash, zsh, csh, ksh, etc.
+Think of "shell" as the category (like “car”), and Bash, Zsh, etc., are models (like Toyota, Honda).
+
+2. What is Bash?
+Bourne Again SHell (bash) was developed as a replacement for sh (GNU Project, 1989).
+Default shell on most Linux distros.
+Adds advanced features:
+Command history (↑ and ↓ keys).
+Tab auto-completion.
+Aliases (alias ll='ls -l').
+Scripting improvements ([[ ]], arrays, functions).
+
+3. Other Popular Shells
+Zsh (Z shell): More modern, customizable, used in macOS by default since 2019.
+Ksh (Korn shell): Adds programming features, used in some enterprise systems.
+Csh/Tcsh (C shell): Syntax looks more like C programming language.
+
+5. Quick Comparison
+| Feature          | sh (Bourne Shell) | bash (Bourne Again Shell) | zsh (Z Shell)      |
+| ---------------- | ----------------- | ------------------------- | ------------------ |
+| Basic commands   | ✅                 | ✅                         | ✅                  |
+| Scripting        | Basic only        | Advanced (arrays, funcs)  | Advanced + plugins |
+| Command history  | ❌                 | ✅                         | ✅                  |
+| Auto-completion  | ❌                 | ✅                         | ✅ (very smart)     |
+| Default on Linux | ❌                 | ✅                         | ❌                  |
+| Default on macOS | ❌                 | ❌                         | ✅ (since 2019)     |
+

@@ -1,0 +1,42 @@
+🖥️ 1. Output with echo
+The echo command is used to display text or variable values.
+
+Basic Example
+echo "Hello, World!"
+
+Print Variable
+name="Rakesh"
+echo "My name is $name"
+
+Options:
+-n → No newline at the end
+echo -n "Enter your name: "
+
+-e → Enable escape sequences
+echo -e "Line1\nLine2"     # prints on two lines
+echo -e "Hello\tWorld"     # adds a tab
+
+⌨️ 2. Input with read
+The read command takes user input.
+
+Basic Example
+read name
+echo "Hello, $name"
+
+With Prompt
+read -p "Enter your name: " name
+echo "Welcome, $name!"
+
+With Multiple Variables
+read -p "Enter your first and last name: " first last
+echo "First: $first, Last: $last"
+
+With Silent Input (passwords)
+read -sp "Enter your password: " password
+echo
+echo "Password entered (hidden): $password"
+
+With Timeout
+read -t 5 -p "Enter your name (within 5 sec): " name
+echo "Name: $name"
+

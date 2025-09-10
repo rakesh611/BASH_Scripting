@@ -1,0 +1,42 @@
+🔑 What is Command Substitution?
+Command substitution allows you to run a command and use its output as a variable or inside another command.
+
+Two ways to do it:
+$(command) → Modern, preferred.
+command (backticks) → Old style, still works but less readable.
+
+🖥️ 1. Using $(command)
+today=$(date)
+echo "Today is: $today"
+✅ Output:
+Today is: Wed Sep 10 10:05:42 IST 2025
+
+🖥️ 2. Using Backticks (``)
+today=`date`
+echo "Today is: $today"
+✅ Output: Same as above.
+
+🔀 3. Nested Commands (why $( ) is better)
+echo "Current dir has $(ls $(pwd) | wc -l) files"
+✅ Example output:
+Current dir has 15 files
+Using backticks for the same is hard to read.
+
+📂 4. Common Examples
+Store Command Output in Variable
+user=$(whoami)
+echo "Logged in as: $user"
+
+Use Inside Another Command
+echo "Files in home: $(ls ~)"
+
+Arithmetic with Command Output
+count=$(ls | wc -l)
+echo "Number of files: $count"
+
+📌 Summary
+| Method                | Example          | Recommended?                 |
+| --------------------- | ---------------- | ---------------------------- |
+| `$(command)`          | `date=$(date)`   | ✅ Yes                        |
+| `command` (backticks) | ``date=`date` `` | ⚠️ Works, but harder to nest |
+

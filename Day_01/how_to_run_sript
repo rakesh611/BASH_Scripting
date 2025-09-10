@@ -1,0 +1,33 @@
+1. Create a simple Bash script
+Example: hello.sh
+#!/bin/bash
+# My first bash script
+echo "Hello, Rakesh! Welcome to Bash scripting."
+
+2. Ways to Run Bash Scripts
+(a) Run with bash command
+bash hello.sh
+Directly runs the script with the bash interpreter.
+Does not need execution permission.
+Always runs with Bash, even if the script’s first line (#!...) is different.
+
+(b) Run as executable (./script.sh)
+chmod +x hello.sh   # give execute permission
+./hello.sh
+Uses the shebang (#!/bin/bash) at the top of the script to decide which interpreter to use.
+Needs execution permission.
+More portable because if you change the shebang to /bin/sh or /usr/bin/python, it will run with that interpreter.
+
+(c) Run with sh command (not always same as bash)
+sh hello.sh
+Runs with the system’s default sh interpreter (might be Dash, not Bash, in Ubuntu/Debian).
+
+If the script has Bash-specific syntax (arrays, [[ ]]), it may break.
+
+3. Key Differences
+| Method           | Needs `chmod +x`? | Uses Shebang? | Always Bash?       |
+| ---------------- | ----------------- | ------------- | ------------------ |
+| `bash script.sh` | ❌ No              | ❌ Ignored     | ✅ Yes              |
+| `./script.sh`    | ✅ Yes             | ✅ Yes         | Depends on shebang |
+| `sh script.sh`   | ❌ No              | ❌ Ignored     | ❌ No (system `sh`) |
+

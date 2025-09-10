@@ -1,0 +1,115 @@
+In Bash scripting, a variable is a name that is used to store a value (data) which can be reused later in the script.
+It acts like a container to hold information such as text, numbers, filenames, or command output.
+
+🔑 Types of Variables in Bash
+There are three main types:
+
+1. User-defined Variables
+Created by the user/programmer in a script or terminal.
+Scope: available only in the shell/session (unless exported).
+
+Example:
+#!/usr/bin/env bash
+# User-defined variable
+name="Rakesh"
+age=30
+
+echo "My name is $name"
+echo "My age is $age"
+
+👉 Rules:
+No spaces around = (❌ name = Rakesh).
+Names usually in lowercase to avoid confusion with system vars.
+Access using $varname.
+
+2. System Variables (Shell Variables)
+Built-in variables provided by the shell itself.
+Used to store information about the shell and processes.
+Usually in UPPERCASE.
+
+Common examples:
+echo $HOME    # Home directory of current user
+echo $PWD     # Present working directory
+echo $USER    # Logged-in username
+echo $SHELL   # Current shell
+echo $PATH    # Directories searched for commands
+echo $$       # Process ID of current shell
+echo $?       # Exit status of last command (0 = success)
+echo $#       # Number of arguments passed to script
+echo $0       # Script name
+echo $1, $2   # First, second argument to script
+
+3. Environment Variables
+Special type of system variable available to all processes.
+Used to configure shell and programs.
+Exported with export.
+
+Example:
+#!/usr/bin/env bash
+# Define environment variable
+export MYAPP_ENV=production
+
+# Check variable
+echo "Environment: $MYAPP_ENV"
+
+🧾 Comparison Table
+| Variable Type      | Scope                           | Example                            |
+| ------------------ | ------------------------------- | ---------------------------------- |
+| **User-defined**   | Script/session only             | `name="Rakesh"`                    |
+| **System (Shell)** | Provided by shell, session only | `$PWD`, `$USER`                    |
+| **Environment**    | Available to all processes      | `export PATH=/usr/local/bin:$PATH` |
+
+
+🔑 Variable Scope in Bash
+By default, all variables in Bash are global (accessible everywhere in the script, even inside functions).
+But you can declare local variables inside functions to limit their scope.
+
+1. Global Variables
+Default behavior in Bash.
+Accessible inside and outside of functions.
+
+Example:
+#!/usr/bin/env bash
+
+name="Rakesh"   # Global variable
+
+print_name() {
+    echo "Inside function: $name"
+}
+
+print_name
+echo "Outside function: $name"
+
+✅ Output:
+Inside function: Rakesh
+Outside function: Rakesh
+
+
+2. Local Variables
+Declared inside functions using the local keyword.
+Exist only within the function scope.
+Not visible outside the function.
+
+Example:
+#!/usr/bin/env bash
+
+name="Rakesh"   # Global variable
+
+print_name() {
+    local name="Kumar"   # Local variable (shadows global)
+    echo "Inside function: $name"
+}
+
+print_name
+echo "Outside function: $name"
+
+✅ Output:
+Inside function: Kumar
+Outside function: Rakesh
+
+
+📌 Key Points to Remember
+By default, variables are global.
+Use local inside functions to avoid overwriting global variables.
+Local variables die when the function ends.
+Environment variables (export) are global across processes, not just the script.

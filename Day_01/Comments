@@ -1,0 +1,27 @@
+1. What are Comments?
+A comment is text in a script that is ignored by the shell.
+They are used for explanations, notes, or temporarily disabling code.
+In Bash, a comment starts with #.
+
+ Examples
+1. Single-line comment
+#!/bin/bash
+# This is a comment
+echo "Hello, World!"   # This prints a message
+
+2. Multi-line comment (trick)
+Bash doesn’t have a direct multi-line comment, but you can use one of these tricks:
+Option 1: Just put # on each line
+# This is line 1
+# This is line 2
+# This is line 3
+
+Option 2: Use a Here Document with : <<'END'
+: <<'END'
+This is a block comment
+It won’t be executed
+END
+
+3. Special Note
+The first line with #! (shebang) is not a comment — it tells the system which interpreter to use.
+Everything else starting with # is a real comment.
