@@ -1,0 +1,21 @@
+The else block in a Bash if statement is used to execute commands when the condition is false.
+
+Syntax of if-else:-
+if [ condition ]
+then
+    # commands if condition is true
+else
+    # commands if condition is false
+fi
+
+Example – Number Check
+#!/bin/bash
+num=5
+
+if [ $num -gt 10 ]
+then
+    echo "Number is greater than 10"
+else
+    echo "Number is less than or equal to 10"
+fi
+✅ Output: Number is less than or equal to 10

@@ -1,0 +1,39 @@
+A nested if means putting one if statement inside another.
+This is useful when you want to check a condition only if another condition is already true.
+
+Syntax of Nested If:-
+if [ condition1 ]
+then
+    if [ condition2 ]
+    then
+        # commands if both condition1 AND condition2 are true
+    else
+        # commands if condition2 is false
+    fi
+else
+    # commands if condition1 is false
+fi
+
+Example – Age and Citizenship
+#!/bin/bash
+age=20
+citizen="yes"
+
+if [ $age -ge 18 ]
+then
+    if [ $citizen = "yes" ]
+    then
+        echo "You are eligible to vote"
+    else
+        echo "You must be a citizen to vote"
+    fi
+else
+    echo "You are not old enough to vote"
+fi
+
+✅ Output: You are eligible to vote
+
+🔑 Key Points about Nested If:
+The inner if runs only if the outer if is true.
+It helps to check multiple related conditions.
+But if you have many conditions, it’s often cleaner to use elif instead of too much nesting.

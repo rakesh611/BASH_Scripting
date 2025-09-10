@@ -1,0 +1,67 @@
+The case statement is like a switch-case in other languages (C, Java, etc.).
+It’s used when you want to compare one variable against multiple values.
+
+Syntax of case in Bash:-
+case variable in
+    pattern1)
+        # commands for pattern1
+        ;;
+    pattern2)
+        # commands for pattern2
+        ;;
+    *)
+        # default commands (if no pattern matches)
+        ;;
+esac
+🔹 ;; → ends a case block.
+🔹 * → acts like default (matches anything).
+🔹 esac → ends the case block (reverse of "case")
+
+Example– Day of Week.
+#!/bin/bash
+day="Mon"
+
+case $day in
+    "Mon")
+        echo "Today is Monday"
+        ;;
+    "Tue")
+        echo "Today is Tuesday"
+        ;;
+    "Wed")
+        echo "Today is Wednesday"
+        ;;
+    *)
+        echo "Unknown day"
+        ;;
+esac
+✅ Output: Today is Monday
+
+Example– Menu Selection
+#!/bin/bash
+echo "Choose an option:"
+echo "1. Show date"
+echo "2. Show current directory"
+echo "3. Show logged in users"
+
+read choice
+
+case $choice in
+    1)
+        date
+        ;;
+    2)
+        pwd
+        ;;
+    3)
+        who
+        ;;
+    *)
+        echo "Invalid choice"
+        ;;
+esac
+
+
+When to use case vs if?
+Use if-elif-else → for ranges or complex conditions (e.g., if [ $num -gt 10 ]).
+Use case → when checking exact matches (strings, numbers, options).

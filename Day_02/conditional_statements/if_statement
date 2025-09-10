@@ -1,0 +1,19 @@
+if are used to make decisions based on conditions.
+They check whether a condition is true or false and then execute commands accordingly.
+
+Basic Syntax of if:-
+if [ condition ]
+then
+    # commands to execute if condition is true
+fi
+
+Example
+#!/bin/bash
+num=10
+
+if [ $num -gt 5 ]
+then
+    echo "Number is greater than 5"
+fi
+
+✅ Output: Number is greater than 5
