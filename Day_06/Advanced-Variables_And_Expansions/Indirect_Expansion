@@ -1,0 +1,62 @@
+🔹 Indirect Expansion in Bash (${!var})
+Indirect expansion means:
+👉 You have a variable that stores the name of another variable, and you want to get the value of that other variable.
+
+1. Basic Example
+name="Rakesh"
+var="name"
+echo $var      # name     (just the string)
+echo ${!var}   # Rakesh   (value of variable "name")
+$var → expands to "name"
+${!var} → expands to value of $name → "Rakesh"
+
+2. Useful with Dynamic Variable Names
+Sometimes variable names are generated dynamically.
+server1="192.168.1.10"
+server2="192.168.1.11"
+id=2
+echo ${!server$id}   # expands to ${!server2} → 192.168.1.11
+
+3. Array Index Indirection
+arr[0]="apple"
+arr[1]="banana"
+index=1
+echo ${arr[$index]}   # banana
+⚠️ But if you store "arr[1]" inside another variable:
+ref="arr[1]"
+echo ${!ref}   # banana
+
+4. Indirect Expansion with Prefix Matching
+${!prefix*} and ${!prefix@} → list all variable names that start with a prefix.
+db_user="admin"
+db_pass="secret"
+db_host="localhost"
+echo ${!db*}   # db_user db_pass db_host
+
+5. Common Use-Cases
+✅ Dynamic configuration loading
+✅ Looping over variables with numbered suffixes (var1, var2, …)
+✅ Avoiding eval (safer & cleaner)
+⚡ Example: Loop over numbered vars
+for i in 1 2
+do
+   var="server$i"
+   echo "Server $i: ${!var}"
+done
+👉 In short:
+$var = value of variable var
+${!var} = value of the variable whose name is stored in var
+
+6. Nameref (declare -n) (Bash ≥ 4.3)
+Creates a reference variable (like a pointer in C).
+Changes through nameref affect the original variable.
+Syntax:
+name="Rakesh"
+declare -n ref=name
+echo $ref      # Rakesh
+ref="Kumar"    # modifies 'name'
+echo $name     # Kumar
+Advantages:
+✅ Works for both read and write
+✅ Cleaner with arrays and functions
+✅ Avoids complex ${!var} nesting

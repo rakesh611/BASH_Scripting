@@ -1,0 +1,73 @@
+When you expand arrays (${array[...]}), Bash gives you powerful ways to extract values, lengths, slices, and even keys.
+🔹 Array Expansions in Bash
+
+1. Single Element Expansion
+fruits=("apple" "banana" "cherry")
+echo ${fruits[0]}     # apple
+echo ${fruits[2]}     # cherry
+
+2. All Elements
+echo ${fruits[@]}     # apple banana cherry
+echo ${fruits[*]}     # apple banana cherry
+👉 Difference when quoted:
+printf "[%s]\n" "${fruits[@]}"
+# [apple]
+# [banana]
+# [cherry]
+printf "[%s]\n" "${fruits[*]}"
+# [apple banana cherry]
+"${arr[@]}" → each element as a separate word
+"${arr[*]}" → all elements as one string
+
+3. Array Length
+echo ${#fruits[@]}    # 3 (number of elements)
+echo ${#fruits[*]}    # 3
+echo ${#fruits[1]}    # 6 (length of "banana")
+
+4. Array Slicing
+echo ${fruits[@]:1}     # banana cherry
+echo ${fruits[@]:0:2}   # apple banana
+👉 Syntax: ${array[@]:start:length}
+
+5. Array Index Expansion
+echo ${!fruits[@]}   # 0 1 2   (list of indices)
+For associative arrays:
+declare -A capitals=([India]="Delhi" [France]="Paris" [Japan]="Tokyo")
+echo ${!capitals[@]}   # India France Japan
+
+6. Pattern Replacement in Arrays
+You can apply parameter expansion rules to each element:
+echo ${fruits[@]/a/A}
+# Apple bAnAnA cherry
+Remove substrings:
+echo ${fruits[@]//a/}
+# pple bnn cherry
+
+7. Default Values in Arrays
+echo ${fruits[5]:-"no fruit"}
+# no fruit   (since index 5 doesn’t exist)
+
+8. Expanding with Brace Expansion
+nums=({1..5})
+echo ${nums[@]}
+# 1 2 3 4 5
+
+9. Using Arrays with Command Substitution
+files=($(ls *.txt))
+echo "Found: ${files[@]}"
+⚠️ Safer version (handles spaces):
+mapfile -t files < <(ls *.txt)
+printf "%s\n" "${files[@]}"
+
+✅ Quick Cheat-Sheet of Array Expansions
+| Expansion           | Meaning                             |
+| ------------------- | ----------------------------------- |
+| `${arr[0]}`         | Single element                      |
+| `${arr[@]}`         | All elements (separate words)       |
+| `${arr[*]}`         | All elements (one word when quoted) |
+| `${#arr[@]}`        | Number of elements                  |
+| `${#arr[i]}`        | Length of element *i*               |
+| `${arr[@]:1:2}`     | Slice (from index 1, length 2)      |
+| `${!arr[@]}`        | List of indices/keys                |
+| `${arr[@]/old/new}` | Replace substring in all elements   |
+

@@ -1,0 +1,76 @@
+🔹 Parameter Expansion in Bash
+Definition:
+Parameter Expansion in Bash is a mechanism to manipulate the value of variables when they are expanded using ${...}.
+It provides default values, substring extraction, search & replace, case modification, and more.
+
+1. Basic Expansion
+name="Rakesh"
+echo $name        # Rakesh
+echo ${name}      # Rakesh
+✅ ${var} is safer than $var, especially when appending text:
+echo "$nameJha"     # will try to expand $nameJha (wrong)
+echo "${name}Jha"   # expands $name + "Jha" → RakeshJha
+
+2. Default Values
+
+a) Use Default if Unset
+echo ${user:-Guest}
+If $user is unset/empty → prints Guest
+Else → prints $user
+
+b) Assign Default if Unset
+echo ${user:=Guest}
+If $user is unset/empty → assigns Guest to $user, then prints it
+
+c) Error if Unset
+echo ${user:?Variable not set
+If $user is unset/empty → prints error message and exits
+
+d) Alternative Value
+echo ${user:+Exists}
+If $user is set → prints "Exists"
+If unset → prints nothing
+
+3. String Length
+name="Rakesh"
+echo ${#name}   # 6
+
+4. Substring Extraction
+text="HelloWorld"
+echo ${text:0:5}   # Hello   (start=0, length=5)
+echo ${text:5}     # World   (start=5 till end)
+
+5. Substring Removal
+
+a) Remove Prefix
+path="/home/rakesh/docs/file.txt"
+echo ${path#*/}   # home/rakesh/docs/file.txt  (shortest match from start)
+echo ${path##*/}  # file.txt                  (longest match from start)
+
+b) Remove Suffix
+echo ${path%/*}   # /home/rakesh/docs   (shortest match from end)
+echo ${path%%/*}  # (empty)             (longest match from end)
+
+6. Search and Replace
+fruit="apple banana apple"
+echo ${fruit/apple/orange}   # orange banana apple   (first match only)
+echo ${fruit//apple/orange}  # orange banana orange  (all matches)
+
+Replace at beginning:
+echo ${fruit/#apple/orange}  # orange banana apple
+
+Replace at end:
+echo ${fruit/%apple/orange}  # apple banana orange
+
+7. Case Modification (Bash ≥ 4)
+word="linux"
+echo ${word^}    # Linux   (capitalize first letter)
+echo ${word^^}   # LINUX   (all uppercase)
+echo ${word,}    # linux   (lowercase first letter)
+echo ${word,,}   # linux   (all lowercase)
+
+8. Indirection (Indirect Reference)
+var="name"
+name="Rakesh"
+echo ${!var}     # Rakesh   (expands to value of variable whose name is stored in var)
+

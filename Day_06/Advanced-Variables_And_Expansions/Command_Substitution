@@ -1,0 +1,60 @@
+🔹 Command Substitution in Bash
+Definition:
+Command substitution allows you to capture the output of a command and use it as a value inside another command or variable.
+
+1. Basic Syntax
+Two ways:
+$(command)       # modern, recommended
+`command`        # older, backticks (harder to nest)
+✅ Example:
+now=$(date)
+echo "Current time: $now"
+
+2. Inline Usage
+echo "You are in: $(pwd)"
+
+3. Assigning to a Variable
+files=$(ls *.txt)
+echo "Text files: $files"
+
+4. Nesting Commands
+With $( ) → easy:
+echo "Today is $(date +%A), user: $(whoami)"
+With backticks → tricky:
+echo "Today is `date +%A`, user: `whoami`"
+⚠️ Nesting backticks requires escaping:
+echo "Nested: `echo \`whoami\``"
+👉 That’s why $( ) is better.
+
+5. Multi-line Commands
+Command substitution removes trailing newlines but keeps internal ones.
+list=$(ls -1)
+echo "$list"
+Shows files line by line.
+If you don’t quote it:
+echo $list
+→ All output collapses into a single line.
+
+6. Inside Arithmetic Expansion
+You can use command output in calculations:
+count=$(ls | wc -l)
+echo "Files: $(( count + 5 ))"
+
+7. Real-World Use Cases
+✅ Capture system info:
+user=$(whoami)
+host=$(hostname)
+echo "You are $user on $host"
+✅ Iterate dynamically:
+for file in $(ls *.log); do
+   echo "Processing $file"
+done
+✅ Compare values:
+if [ "$(whoami)" = "root" ]; then
+   echo "Running as root"
+fi
+
+⚡ Key Points
+$( ... ) is preferred over backticks `...`.
+Captures stdout only (stderr is not included unless redirected).
+Trailing newline is stripped automatically.

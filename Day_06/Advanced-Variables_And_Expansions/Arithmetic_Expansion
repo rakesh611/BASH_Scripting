@@ -1,0 +1,63 @@
+🔹 Arithmetic Expansion in Bash ($((...)))
+Arithmetic Expansion lets you perform calculations directly inside your shell script or command line.
+
+1. Basic Syntax
+echo $(( 5 + 3 ))      # 8
+echo $(( 10 - 4 ))     # 6
+echo $(( 6 * 7 ))      # 42
+echo $(( 20 / 4 ))     # 5
+echo $(( 17 % 5 ))     # 2 (modulus)
+✅ Inside $(( ... )), Bash treats everything as integer arithmetic.
+✅ Spaces don’t matter: 5+3 and 5 + 3 are the same.
+
+2. Using Variables
+a=10
+b=3
+echo $(( a + b ))      # 13
+echo $(( a - b ))      # 7
+echo $(( a * b ))      # 30
+echo $(( a / b ))      # 3 (integer division)
+echo $(( a % b ))      # 1
+
+3. Assignment Inside Expansion
+x=5
+echo $(( x += 3 ))   # 8   (x = x + 3)
+echo $x              # 8
+Supported operators: +=, -=, *=, /=, %=
+
+4. Increment and Decrement
+n=10
+echo $(( n++ ))   # 10 (post-increment, prints old value)
+echo $n           # 11
+echo $(( ++n ))   # 12 (pre-increment, increments first)
+
+5. Bitwise Operations
+a=5    # 0101 in binary
+b=3    # 0011 in binary
+echo $(( a & b ))   # 1 (AND)
+echo $(( a | b ))   # 7 (OR)
+echo $(( a ^ b ))   # 6 (XOR)
+echo $(( a << 1 ))  # 10 (shift left)
+echo $(( a >> 1 ))  # 2  (shift right)
+
+6. Comparison (Returns 1 or 0)
+a=7
+b=10
+echo $(( a < b ))   # 1 (true)
+echo $(( a > b ))   # 0 (false)
+echo $(( a == b ))  # 0
+echo $(( a != b ))  # 1
+
+7. Base Conversion
+Decimal → Other bases
+echo $(( 2#1010 ))   # binary 1010 = 10
+echo $(( 8#17 ))     # octal 17 = 15
+echo $(( 16#FF ))    # hex FF = 255
+Other bases → Decimal
+num=16#1A
+echo $(( num ))      # 26
+
+8. Mixing with Command Substitution
+count=$(ls | wc -l)
+echo "Files: $(( count + 10 ))"
+

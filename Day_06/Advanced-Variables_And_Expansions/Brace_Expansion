@@ -1,0 +1,59 @@
+🔹 Brace Expansion in Bash
+Definition:
+Brace expansion generates a set of strings based on a pattern enclosed in {...}.
+It happens before variable expansion and filename globbing.
+
+1. Simple List Expansion
+echo {one,two,three}
+# one two three
+👉 Expands into all comma-separated elements.
+
+2. String Prefix/Suffix Combination
+echo file{A,B,C}.txt
+# fileA.txt fileB.txt fileC.txt
+Useful for creating multiple filenames at once.
+
+3. Ranges
+Numeric Ranges:
+echo {1..5}
+# 1 2 3 4 5
+Character Ranges:
+echo {a..e}
+# a b c d e
+
+4. Ranges with Steps
+echo {1..10..2}
+# 1 3 5 7 9
+echo {Z..A..2}
+# Z X V T R P N L J H F D B
+
+5. Nested Expansions
+Brace expansions can be nested:
+echo {A,B}{1,2}
+# A1 A2 B1 B2
+
+6. With Prefixes & Suffixes
+echo report_{2022..2025}.pdf
+# report_2022.pdf report_2023.pdf report_2024.pdf report_2025.pdf
+
+7. Empty String in Brace
+echo {,backup_}file.txt
+# file.txt backup_file.txt
+
+8. Using Brace Expansion in Loops
+for i in {1..3}; do
+  echo "Run $i"
+done
+# Run 1
+# Run 2
+# Run 3
+
+9. Creating Directories/Files Quickly
+mkdir -p project/{src,bin,docs}
+ls project
+# src bin docs
+
+⚡ Key Points
+Expansion happens before execution (not runtime).
+It’s purely string generation, not arithmetic (though ranges look numeric).
+Faster & cleaner than writing multiple commands.
